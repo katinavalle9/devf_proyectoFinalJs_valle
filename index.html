@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="lib/fontawesome-free-6.4.0-web/css/all.min.css">
+    <link rel="stylesheet" href="lib/MDB5-STANDARD-UI-KIT-Free-6.2.0/css/mdb.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Cajero Automatico</title>
+</head>
+
+<body class="container container-fluid  bg-secondary text-white">
+    <div class="row">
+        <h1 class="text-center pt-5 mb-3">Cajero automático</h1>
+        <div class="col-6 text-center">
+            <label for="usuarios" class="form-label text-white">Selecciona un usuario:</label>
+            <select id="usuarios" class="form-select">
+                <option value="">Seleccione una opción</option>
+            </select>
+            <p id="mostrarNombre" style="display: none;" class="mt-3">Has seleccionado: <span id="resultado"></span></p>
+        </div>
+        <!-- contrasenia -->
+        <div class="col-6 text-center" id="passwordInput" style="display: none;">
+            <label for="password" class="form-label text-white">Ingresa la contraseña:</label>
+            <input type="password" id="passwordField" class="form-control">
+            <button id="submitPasswordButton" class="mt-3 btn btn-warning">Confirmar</button>
+            <p id="validacionContrasenia" class="mt-3"></p>
+        </div>
+
+    </div>
+    <div class="row">
+        <!-- Acción para poder elegir alguna opción -->
+        <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+            <label for="acciones" id="pasoParaAccion" style="display: none;" class="form-label mb-3 text-white">
+                Ingrese una acción:
+            </label>
+            <select id="opcionesSelect" style="display: none;" class="form-select w-50">
+            </select>
+            <p id="accion" style="display: none;" class="mt-3"><span id="seSelecciono"></span></p>
+        </div>
+        <!-- Modal del saldo -->
+        <div class="modal fade" id="modalConsultarSaldo" tabindex="-1" aria-labelledby="modalConsultarSaldoLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content text-dark">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalConsultarSaldo">Consulta de saldo actual</h5>
+                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="consultarSaldo"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="lib/fontawesome-free-6.4.0-web/js/all.min.js"></script>
+    <script src="lib/MDB5-STANDARD-UI-KIT-Free-6.2.0/js/mdb.min.js"></script>
+    <script src="js/cajeroAutomativo.js" defer></script>
+</body>
+
+</html>
