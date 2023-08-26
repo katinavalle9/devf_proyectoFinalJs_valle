@@ -5,16 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="lib/fontawesome-free-6.4.0-web/css/all.min.css">
-    <link rel="stylesheet" href="lib/MDB5-STANDARD-UI-KIT-Free-6.2.0/css/mdb.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <title>Cajero Automatico</title>
 </head>
 
 <body class="container container-fluid  bg-secondary text-white">
+    <!-- Selecionar cuaenta -->
     <div class="row">
         <h1 class="text-center pt-5 mb-3">Cajero automático</h1>
         <div class="col-6 text-center">
-            <label for="usuarios" class="form-label text-white">Selecciona un usuario:</label>
+            <label for="usuarios" class="form-label text-white">Selecciona una cuenta:</label>
             <select id="usuarios" class="form-select">
                 <option value="">Seleccione una opción</option>
             </select>
@@ -33,29 +34,59 @@
         <!-- Acción para poder elegir alguna opción -->
         <div class="col-12 d-flex flex-column justify-content-center align-items-center">
             <label for="acciones" id="pasoParaAccion" style="display: none;" class="form-label mb-3 text-white">
-                Ingrese una acción:
+                Elige una acción:
             </label>
             <select id="opcionesSelect" style="display: none;" class="form-select w-50">
             </select>
             <p id="accion" style="display: none;" class="mt-3"><span id="seSelecciono"></span></p>
-        </div>
-        <!-- Modal del saldo -->
-        <div class="modal fade" id="modalConsultarSaldo" tabindex="-1" aria-labelledby="modalConsultarSaldoLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content text-dark">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalConsultarSaldo">Consulta de saldo actual</h5>
-                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p id="consultarSaldo"></p>
-                    </div>
-                </div>
-            </div>
+            <button id="aceptarAccion" class="btn btn-success" style="display: none;">Aceptar</button>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center mt-3">
+            <button type="button" class="btn btn-secondary me-3 d-none" id="info" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Ingresa la cantidad para realizar tu movimiento considerando el saldo que tienes en la cuenta. El sistema no permite capturar un saldo mayor $990 y el monto minimo permitido a capturar es de $10.">
+                <i class="fa-solid fa-circle-info fa-xl m-0s"></i>
+              </button>
+            <input class="form-control w-50" style="display: none;" id="montoInput"
+                placeholder="Ingresa la cantidad...">
+           
+        </div>
+        <div class="col-12 d-flex justify-content-center mt-3">
+            <button id="ingresarCantidad" style="display: none;" class="btn btn-success w-25">Relizar movimiento</button>
+        </div>
+
+    </div>
+    <!-- Modal del saldo -->
+    <div class="modal fade" id="modalConsultarSaldo"  tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content text-dark">
+            <div class="modal-header">
+              <h5 class="modal-title">Consulta de saldo actual</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="saldoIngresado" style="display: none;"></p>
+                <p id="consultarSaldo"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- Modal sin dinero -->
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3 text-dark">
+  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Notificación</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body" id="toast-body">
+        Limite de saldo alcanzado para realizar esta acción
+    </div>
+  </div>
+</div>
+    
     <script src="lib/fontawesome-free-6.4.0-web/js/all.min.js"></script>
-    <script src="lib/MDB5-STANDARD-UI-KIT-Free-6.2.0/js/mdb.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/cajeroAutomativo.js" defer></script>
 </body>
 
