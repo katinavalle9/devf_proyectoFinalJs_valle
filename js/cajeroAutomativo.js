@@ -56,8 +56,12 @@ const opciones = ["Consultar saldo", "Ingresar monto", "Retirar monto"];
 const toastBootstrap = bootstrap.Toast.getOrCreateInstance(
   document.getElementById("liveToast")
 );
-const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+const tooltipTriggerList = document.querySelectorAll(
+  '[data-bs-toggle="tooltip"]'
+);
+const tooltipList = [...tooltipTriggerList].map(
+  (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+);
 
 document.addEventListener("DOMContentLoaded", () => {
   //para mostrar todos los usuarios en el select e ir pintandolos en el Dom
@@ -132,6 +136,28 @@ function retirarSaldo() {
   consultaSaldo();
 }
 
+function realizarAccion() {
+  opcionSeleccionada = opcionesSelect.value;
+  seSelecciono.style.display = "block";
+  seSelecciono.textContent =
+    opcionSeleccionada !== ""
+      ? `Opción seleccionada: ${opcionSeleccionada}`
+      : "";
+  //VALIDACION DE OPCIONES DEL SEGUNDO SELECT
+  if (opcionSeleccionada === "Consultar saldo") {
+    montoInput.style.display = "none";
+    ingresarCantidad.style.display = "none";
+    info.classList.add("d-none");
+    consultaSaldo();
+  } else if (opcionSeleccionada === "Ingresar monto") {
+    montoInput.style.display = "block";
+    info.classList.remove("d-none");
+  } else if (opcionSeleccionada === "Retirar monto") {
+    montoInput.style.display = "block";
+    info.classList.remove("d-none");
+  }
+}
+
 function eventos() {
   selectUsuarios.addEventListener("change", () => {
     const seleccionadoId = parseInt(selectUsuarios.value);
@@ -204,27 +230,13 @@ function eventos() {
     }
   });
 
-  aceptarAccion.addEventListener("click", () => {
-    opcionSeleccionada = opcionesSelect.value;
-    seSelecciono.style.display = "block";
-    seSelecciono.textContent =
-      opcionSeleccionada !== ""
-        ? `Opción seleccionada: ${opcionSeleccionada}`
-        : "";
-    //VALIDACION DE OPCIONES DEL SEGUNDO SELECT
-    if (opcionSeleccionada === "Consultar saldo") {
-      montoInput.style.display = "none";
-      ingresarCantidad.style.display = "none";
-      info.classList.add("d-none");
-      consultaSaldo();
-    } else if (opcionSeleccionada === "Ingresar monto") {
-      montoInput.style.display = "block";
-      info.classList.remove("d-none");
-    } else if (opcionSeleccionada === "Retirar monto") {
-      montoInput.style.display = "block";
-      info.classList.remove("d-none");
-    }
+  opcionesSelect.addEventListener("change", () => {
+    realizarAccion();
   });
+
+  aceptarAccion.addEventListener("click", (e) => {
+    realizarAccion()
+  })
 
   ingresarCantidad.addEventListener("click", () => {
     if (montoInput.value !== "") {
@@ -238,7 +250,7 @@ function eventos() {
   });
 
   myModal -
-    addEventListener("hide.mdb.modal", () => {
+    addEventListener("hide.bs.modal", () => {
       saldoIngresado.style.display = "none";
     });
 }
