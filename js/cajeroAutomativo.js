@@ -181,24 +181,30 @@ function eventos() {
     } else {
       montoPermitido = seleccionado.saldo - montoMinimo;
     }
+    // Verifica si el valor ingresado no coincide con la expresión regular o es mayor al monto permitido.
     if (
       (!regex.test(montoInput.value) && montoInput.value !== "0.") ||
       parseFloat(montoInput.value) > montoPermitido
     ) {
+       // Si el valor no es válido, establece el valor del input en un valor anterior o vacío.
       montoInput.value =
         montoPermitido <= 0 ? "" : e.target._previousValue || "";
+         // Si el monto permitido es menor o igual a cero, muestra una notificación
       if (montoPermitido <= 0) {
         toastBootstrap.show();
       }
     } else if (montoInput.value === "") {
       ingresarCantidad.style.display = "none";
     } else {
+      // Si el valor es válido, guarda el valor anterior y muestra un elemento (ingresarCantidad)
       e.target._previousValue = montoInput.value;
       ingresarCantidad.style.display = "block";
     }
   });
 
+  //En resumen, este fragmento de código garantiza que solo se ingresen caracteres numéricos, el punto decimal y algunas teclas de control específicas en el campo de entrada montoInput, y evita que otros caracteres sean ingresados.
   montoInput.addEventListener("keydown", (e) => {
+    //Verifica si la tecla presionada está en la lista de teclas permitidas.
     if (
       ![
         "Digit0",
@@ -218,6 +224,7 @@ function eventos() {
         "Delete",
       ].includes(e.code)
     ) {
+      // Si la tecla no está en la lista permitida, evita su comportamiento predeterminado.
       e.preventDefault();
     }
     // Solo permite un punto decimal
@@ -250,7 +257,7 @@ function eventos() {
   });
 
   myModal -
-    addEventListener("hide.bs.modal", () => {
+addEventListener("hide.bs.modal", () => {
       saldoIngresado.style.display = "none";
     });
 }
